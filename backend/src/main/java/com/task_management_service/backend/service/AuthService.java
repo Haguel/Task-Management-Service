@@ -42,16 +42,16 @@ public class AuthService {
     }
 
     public JwtAuthDto signIn(SignInUserDto signInUserDto) {
+        UserEntity user = userService.getUserByEmail(signInUserDto.getEmail());
+
+        if(user == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Can not find authenticated user by provided email");
+        }
+
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 signInUserDto.getEmail(),
                 signInUserDto.getPassword()
         ));
-
-        UserEntity user = userService.getUserByEmail(signInUserDto.getEmail());
-
-        if(user == null) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Can not find authenticated user by email");
-        }
 
         return new JwtAuthDto(jwtService.generateToken(user));
     }
