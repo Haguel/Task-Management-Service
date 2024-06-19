@@ -1,0 +1,222 @@
+@font-face {
+  font-family: 'BoldRounded';
+  src: url('../../fonts/bolt-rounded/Bolt Rounded.woff2') format('woff2'),
+  url('../../fonts/bolt-rounded/Bolt Rounded.woff') format('woff'),
+  url('../../fonts/bolt-rounded/Bolt Rounded.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  background: #1B2727;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+.intro{
+  display: flex;
+  flex-direction: column;
+  padding-top: 2vw;
+  gap: 0.5vw;
+  align-items: center;
+  width: 100%;
+}
+.head {
+  color: #D5DDDF;
+  font-family: 'BoldRounded';
+  font-size: 4vw;
+}
+.intro p {
+  color: #D5DDDF;
+  font-family: 'BoldRounded';
+  font-size: 1vw;
+  max-width: 50vw;
+  text-align: center;
+}
+
+.down-button {
+  margin-top: 2.2vw;
+  padding-bottom: 2vw;
+}
+
+.offers-list {
+  display: flex;
+  flex-direction: row;
+  padding-top: 3vw;
+  gap: 5vw;
+}
+.offers-list input {
+  border: none;
+  border-radius: 1vw;
+  width: 18vw;
+  height: 6vw;
+  background: #3C5148;
+  color: #B2C5B2;
+  font-family: 'BoldRounded';
+  font-size: 1.5vw;
+}
+
+.ui-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 50vw;
+  padding-top: 15vw;
+  background-color: rgba(60, 81, 72, 0.1);
+}
+.ui-info h1 {
+  color: #D5DDDF;
+  font-family: 'BoldRounded';
+  font-size: 4vw;
+}
+.info-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.info-text hr {
+  color: #B2C5B2;
+  border: 1px solid #B2C5B2;
+  width: 40%;
+}
+.info-text p {
+  width: 30%;
+  color: #D5DDDF;
+  font-family: 'BoldRounded';
+  font-size: 1vw;
+  text-align: center;
+}
+
+.triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 52.08vw solid transparent;
+  border-right: 52.08vw solid transparent;
+  border-bottom: 41.67vw solid #6B8E4E;
+  top: 57vw;
+  left: 15%;
+  z-index: -1;
+  margin-left: 40vw;
+}
+.collaboration-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 50vw;
+  padding-left: 5vw;
+  padding-top: 5vw;
+}
+.collaboration-info h1 {
+  color: #D5DDDF;
+  font-family: 'BoldRounded';
+  font-size: 4vw;
+}
+.collab-triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 52.08vw solid transparent;
+  border-right: 52.08vw solid transparent;
+  border-top: 41.67vw solid #6B8E4E;
+  top: 98.6vw;
+  left: 15%;
+  z-index: -1;
+  margin-left: 40vw;
+}
+.calendar-info {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 50vw;
+  padding-top: 5vw;
+  padding-right: 5vw;
+  justify-content: end;
+}
+.calendar-info h1 {
+  color: #D5DDDF;
+  font-family: 'BoldRounded';
+  font-size: 4vw;
+}
+.calendar-triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 0px solid transparent;
+  border-right: 52.08vw solid transparent;
+  border-bottom: 41.67vw solid #6B8E4E;
+  top: 156.6vw;
+  left: -47.5vw;
+  z-index: -1;
+  margin-left: 40vw;
+}
+
+.report-info {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 50vw;
+  padding-left: 5vw;
+
+}
+.report-triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 0vw solid transparent;
+  border-right: 52.08vw solid transparent;
+  border-top: 41.67vw solid #6B8E4E;
+  top: 198.3vw;
+  left: -47.5vw;
+  z-index: -1;
+  margin-left: 40vw;
+}
+.report-info h1 {
+  color: #D5DDDF;
+  font-family: 'BoldRounded';
+  font-size: 4vw;
+}
+
+.info-block {
+  position: relative;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  text-align: center;
+  color: #333;
+}
+.info-block::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 200px;
+  height: 200px;
+  background-color: rgba(107, 142, 78, 0.1);
+  border-radius: 50%;
+  z-index: -1;
+}
+.info-block::after {
+  content: "";
+  position: absolute;
+  bottom: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  background-color: rgba(107, 142, 78, 0.1);
+  border-radius: 50%;
+  z-index: -1;
+}
+.info-block h1 {
+  margin: 0;
+  font-size: 24px;
+}
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
