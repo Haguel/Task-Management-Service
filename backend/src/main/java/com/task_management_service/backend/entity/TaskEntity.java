@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.task_management_service.backend.enumeration.TaskStatus;
+import com.task_management_service.backend.utils.Converter;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -44,4 +45,8 @@ public class TaskEntity {
     @JoinColumn(name = "userId", nullable = false)
     @JsonIgnore
     private UserEntity user;
+
+    public void setUntilDate(String iso8601) {
+        this.untilDate = Converter.convertToLocalDateTime(iso8601);
+    }
 }

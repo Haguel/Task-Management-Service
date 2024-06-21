@@ -1,13 +1,14 @@
 package com.task_management_service.backend.dto.request;
 
 import com.task_management_service.backend.enumeration.TaskStatus;
+import com.task_management_service.backend.utils.RegexpBase;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 import java.time.LocalDateTime;
 
 public record UpdateTaskDto(
-    @Pattern(regexp = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}", message = "Task id must be a type of UUID")
+    @Pattern(regexp = RegexpBase.UUID_REGEXP, message = "Task id must be a type of UUID")
     @NotNull
     String taskId,
 
@@ -17,7 +18,8 @@ public record UpdateTaskDto(
     String description,
 
     @NotNull
-    LocalDateTime untilDate,
+    @Pattern(regexp = RegexpBase.ISO8601_REGEXP, message = "untilDate must be in ISO 8601 format")
+    String untilDate,
 
     @NotNull
     TaskStatus status
