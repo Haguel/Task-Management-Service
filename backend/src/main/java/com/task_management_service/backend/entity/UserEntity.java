@@ -7,6 +7,7 @@ import com.task_management_service.backend.enumeration.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.security.core.GrantedAuthority;
@@ -47,6 +48,10 @@ public class UserEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @ToString.Exclude
+    private List<TaskEntity> tasks;
 
     public UserEntity(String name, String username, String email, String passwordHash, Role role) {
         this.name = name;

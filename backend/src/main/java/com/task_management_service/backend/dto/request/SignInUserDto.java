@@ -5,13 +5,12 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-@Data
-@RequiredArgsConstructor
-public class SignInUserDto{
+public record SignInUserDto(
         @NotNull(message = "Email field can't be null.")
         @Email(message = "Invalid email. Please provide correct email address")
-        final String email;
+        String email,
 
         @NotNull(message = "Password field can't be null.")
-        final String password;
+        String password
+){
 }

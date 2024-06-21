@@ -22,17 +22,17 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     public JwtAuthDto signUp(SignUpUserDto signUpUserDto) {
-        UserEntity existedUser = userService.getUserByUsernameOrEmail(signUpUserDto.getUsername(), signUpUserDto.getEmail());
+        UserEntity existedUser = userService.getUserByUsernameOrEmail(signUpUserDto.username(), signUpUserDto.email());
 
         if(existedUser != null) {
             throw new ResponseStatusException(HttpStatus.CONFLICT, "User with such username or email already exists");
         }
 
         UserEntity newUser = new UserEntity(
-                signUpUserDto.getName(),
-                signUpUserDto.getUsername(),
-                signUpUserDto.getEmail(),
-                passwordEncoder.encode(signUpUserDto.getPassword()),
+                signUpUserDto.name(),
+                signUpUserDto.username(),
+                signUpUserDto.email(),
+                passwordEncoder.encode(signUpUserDto.password()),
                 Role.USER
         );
 
@@ -42,15 +42,15 @@ public class AuthService {
     }
 
     public JwtAuthDto signIn(SignInUserDto signInUserDto) {
-        UserEntity user = userService.getUserByEmail(signInUserDto.getEmail());
+        UserEntity user = userService.getUserByEmail(signInUserDto.email());
 
         if(user == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Can not find authenticated user by provided email");
         }
 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                signInUserDto.getEmail(),
-                signInUserDto.getPassword()
+                signInUserDto.email(),
+                signInUserDto.password()
         ));
 
         return new JwtAuthDto(jwtService.generateToken(user));

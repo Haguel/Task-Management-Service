@@ -8,23 +8,21 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-@Data
-@RequiredArgsConstructor
-@Getter
-public class SignUpUserDto{
+public record SignUpUserDto(
         @NotNull(message = "Name field can't be null")
-        final String name;
+        String name,
 
         @Size(min = 4, max = 20, message = "Username must be between 4 and 20 characters long")
         @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Invalid username. It should contain only English letters and numbers")
         @NotNull(message = "Username field can't be null")
-        final String username;
+        String username,
 
         @Email(message = "Invalid email. Please provide correct email address")
         @NotNull(message = "Email field can't be null")
-        final String email;
+        String email,
 
         @Size(min = 8, max = 50, message = "Password must be between 8 and 50 characters long")
         @NotNull(message = "Password field can't be null")
-        final String password;
+        String password
+){
 }
