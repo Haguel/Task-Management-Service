@@ -1,0 +1,107 @@
+@font-face {
+  font-family: 'BoldRounded';
+  src: url('../../fonts/bolt-rounded/Bolt Rounded.woff2') format('woff2'),
+  url('../../fonts/bolt-rounded/Bolt Rounded.woff') format('woff'),
+  url('../../fonts/bolt-rounded/Bolt Rounded.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  background: #1B2727;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  width: 100%;
+}
+.registration-form {
+  display: flex;
+  flex-direction: row;
+  width: 60vw;
+  height: 40vw;
+  background: #3C5148;
+  font-family: BoldRounded;
+  color: #D5DDDF;
+  margin-top: 3vw;
+  margin-left: 20vw;
+  border-radius: 1vw;
+  -webkit-box-shadow: 0px 1px 20px -7px rgba(0,0,0,0.42);
+  -moz-box-shadow: 0px 1px 20px -7px rgba(0,0,0,0.42);
+  box-shadow: 0px 1px 20px -7px rgba(0,0,0,0.42);
+}
+.registration-form-pic {
+  width: 55%;
+  height: 100%;
+  background: #364940;
+  border-radius: 1vw;
+  display: flex;
+  flex-direction: column;
+  padding: 3vw;
+  color: #D5DDDF;
+  gap: 3vw;
+}
+.registration-form-fields {
+  display: flex;
+  flex-direction: column;
+  padding: 3vw;
+  color: #D5DDDF;
+  gap: 2vw;
+  width: 45%;
+}
+.registration-form-fields-headers {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5vw;
+  padding-left: 0.5vw;
+  padding-right: 0.5vw;
+}
+.registration-form-fields a {
+  text-decoration: none;
+  color: #B2C5B2;
+  transition: ease-in 0.3s;
+}
+.registration-form-fields a:hover {
+  color: #e8f0f3;
+}
+
+.registration-fields-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5vw;
+  margin-top: 1.3vw;
+}
+.registration-fields-inputs p {
+  margin-left: 0.5vw;
+}
+
+.inputs {
+  background: #364940;
+  border: none;
+  border-radius: 1vw;
+  width: 100%;
+  height: 2.5vw;
+  padding-left: 0.5vw;
+  color: #D5DDDF;
+}
+.registration-fields-button {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4.4vw;
+}
+
+.registration-fields-button input {
+  width: 70%;
+  height: 4vw;
+  border: none;
+  border-radius: 1vw;
+  background-color: #6e7c65;
+  font-size: 1.4vw;
+  color: #D5DDDF;
+  align-self: center;
+  -webkit-box-shadow: 0px 1px 20px -7px rgba(0,0,0,0.42);
+  -moz-box-shadow: 0px 1px 20px -7px rgba(0,0,0,0.42);
+  box-shadow: 0px 1px 20px -7px rgba(0,0,0,0.42);
+  transition: ease-in-out 0.3s;
+}
+.registration-fields-button input:hover {
+  background-color: #809378;
+}

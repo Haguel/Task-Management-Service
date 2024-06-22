@@ -14,6 +14,7 @@
   background-color: rgb(1, 0, 0, 0.3);
   gap: 2vw;
   padding-left: 4.5vw;
+  padding-right: 4.5vw;
   align-items: center;
 }
 .my-navbar a {
@@ -25,4 +26,10 @@
 }
 .my-navbar a:hover {
   color: #D5DDDF;
+}
+.account-info-navbar {
+  display: flex;
+  flex-direction: row;
+  gap: 1vw;
+  margin-left: auto;
 }
