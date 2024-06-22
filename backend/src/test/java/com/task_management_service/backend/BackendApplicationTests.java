@@ -1,9 +1,10 @@
 package com.task_management_service.backend;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
-@SpringBootTest
+@RunWith(Suite.class)
 class BackendApplicationTests {
 
 	@Test
