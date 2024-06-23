@@ -6,12 +6,13 @@
   font-weight: normal;
   font-style: normal;
 }
-body {
+.mybody {
   background: #1B2727;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
   width: 100%;
+  min-height: 100vh;
 }
 .registration-form {
   display: flex;
@@ -104,7 +105,9 @@ body {
 .registration-fields-button input:hover {
   background-color: #809378;
 }
-
 .invalid {
-  color: red;
+  color: #f4a8a8;
+}
+.disabled {
+  background-color: #353c30;
 }
