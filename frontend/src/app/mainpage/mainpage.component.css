@@ -6,7 +6,7 @@
   font-weight: normal;
   font-style: normal;
 }
-body {
+.mybody {
   background: #1B2727;
   display: flex;
   flex-direction: column;
@@ -254,7 +254,10 @@ body {
   text-align: right;
   width: 85%;
 }
-footer {
+.report-info img {
+  width: 40vw;
+}
+.myfooter {
   display: flex;
   flex-direction: row;
   width: 100%;

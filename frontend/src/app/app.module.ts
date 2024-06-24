@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { RegistrationformComponent } from './registrationform/registrationform.component';
 import { LoginformComponent } from './loginform/loginform.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainpageComponent,
     RegistrationformComponent,
-    LoginformComponent
+    LoginformComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
