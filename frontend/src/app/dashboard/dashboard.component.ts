@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import {CreatetaskwindowComponent} from "../createtaskwindow/createtaskwindow.component";
+import {KeyValue} from "@angular/common";
 
 @Component({
   selector: 'app-dashboard',
@@ -7,38 +10,37 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent {
+  bsModalRef!: BsModalRef;
+
   status_columns_list = {
-    "Assigned": [
-      'Get to work',
-      'Pick up groceries',
-      'Go home',
-      'Fall asleep'
-    ],
-    "In Progress": [],
-    "In Review": [],
-    "Completed": [
-      'Get up',
-      'Brush teeth',
-      'Take a shower',
-      'Check e-mail',
-      'Walk dog'
-    ],
-    "Deferred": [
-      'Pol',
-    ]
+    'To do': ['Task 1', 'Task 2', 'Task 3'],
+    'Doing': [],
+    'Finished': [],
+    'Expired': ['Task 4', 'Task 5']
+  };
+
+  // Пользовательский компаратор для сохранения исходного порядка
+  originalOrder = (a: KeyValue<string, string[]>, b: KeyValue<string, string[]>): number => {
+    const order = ['To do', 'Doing', 'Finished', 'Expired'];
+    return order.indexOf(a.key) - order.indexOf(b.key);
+  };
+
+  constructor(private modalService: BsModalService) {}
+
+  openModal() {
+    this.bsModalRef = this.modalService.show(CreatetaskwindowComponent);
   }
+
 
   getClass(key: string): string {
     switch (key) {
-      case "Assigned":
+      case "To do":
         return 'assigned-circle';
-      case 'In Progress':
+      case 'Doing':
         return 'progress-circle';
-      case 'In Review':
-        return 'review-circle';
-      case 'Completed':
+      case 'Finished':
         return 'complete-circle';
-      case 'Deferred':
+      case 'Expired':
         return 'deferred-circle';
       default:
         return '';

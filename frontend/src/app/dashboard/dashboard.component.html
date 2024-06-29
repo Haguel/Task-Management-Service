@@ -7,18 +7,18 @@
         <button class="search-btn" type="button"><img alt="search_icon" src="assets/search_icon.png"></button>
         <input type="text" placeholder="Search here..."/>
       </div>
-      <input type="button" value="Add task"/>
+      <input type="button" (click)="openModal()" value="Add task"/>
     </div>
   </div>
   <div class="dashboard">
     <div class="dashboard-classes">
-      <div class="dashboard-class" *ngFor="let new_class of status_columns_list | keyvalue">
+      <div class="dashboard-class" *ngFor="let new_class of status_columns_list | keyvalue: originalOrder">
         <p>{{new_class.key}}</p>
         <div [ngClass]="getClass(new_class.key)"></div>
       </div>
     </div>
     <div class="dashboard-columns" cdkDropListGroup>
-      <div *ngFor="let column of status_columns_list | keyvalue" class="dashboard-column">
+      <div *ngFor="let column of status_columns_list |  keyvalue: originalOrder" class="dashboard-column">
         <div [cdkDropListData]="column.value" cdkDropList class="dashboard-list" (cdkDropListDropped)="drop($event)">
           <div class="task" draggable="true" *ngFor="let item of column.value" cdkDrag>
             <div class="task-header">
