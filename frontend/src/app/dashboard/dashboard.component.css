@@ -132,7 +132,7 @@
 .dashboard-class {
   display: flex;
   flex-direction: row;
-  width: 16.86vw;
+  width: 24vw;
   height: 5vw;
   background: #364940;
   border-radius: 1vw;
@@ -147,6 +147,7 @@
   display: flex;
   flex-direction: column;
   gap: 1vw;
+  width: 24vw;
 }
 .assigned-circle {
   width: 1vw;
@@ -183,7 +184,7 @@
    display: flex;
    flex-direction: column;
    background: #364940;
-   width: 16.8vw;
+   width: 21.2vw;
    height: 40vw;
    border-radius: 1vw;
    padding: 0.7vw;
@@ -198,7 +199,7 @@
 .task {
   display: flex;
   flex-direction: column;
-  width: 15.5vw;
+  width: 19.8vw;
   height: 4.93vw;
   border-radius: 1vw;
   background-color: rgba(41, 57, 49, 0.89);

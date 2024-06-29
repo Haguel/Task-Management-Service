@@ -7,22 +7,20 @@
       <h1 style="font-size: 2vw">Start you journey</h1>
       <p style="font-size: 0.9vw">Dont have an account? <a href="/signup">Sign up!</a></p>
     </div>
-    <form id="sign_up_form">
-      <div class="registration-fields-inputs">
-        <div>
-          <p>Email</p>
-          <input class="inputs" type="text" placeholder="Input your email"
-                 pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                 title="Please enter a valid email address. Example: user@example.com" required/>
-        </div>
-        <div>
-          <p>Password</p>
-          <input class="inputs" type="text" placeholder="Input your password"/>
-        </div>
+    <div class="registration-fields-inputs">
+      <div>
+        <p>Email</p>
+        <input [(ngModel)]="email" class="inputs" type="text" placeholder="Input your email"
+               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+               title="Please enter a valid email address. Example: user@example.com" required/>
       </div>
-    </form>
+      <div>
+        <p>Password</p>
+        <input [(ngModel)]="password" class="inputs" type="text" placeholder="Input your password"/>
+      </div>
+    </div>
     <div class="registration-fields-button">
-      <input type="submit" value="Sign in"/>
+      <input type="submit" value="Sign in" (click)="loginUser()"/>
     </div>
   </div>
   <div class="registration-form-pic">
