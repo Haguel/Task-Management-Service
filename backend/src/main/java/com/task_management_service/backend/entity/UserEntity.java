@@ -51,7 +51,7 @@ public class UserEntity implements UserDetails {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     @ToString.Exclude
-    private List<TaskEntity> tasks;
+    private List<TaskEntity> tasks = new ArrayList<>();
 
     public UserEntity(String name, String username, String email, String passwordHash, Role role) {
         this.name = name;

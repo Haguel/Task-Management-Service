@@ -2,13 +2,13 @@ package com.task_management_service.backend.repository;
 
 import com.task_management_service.backend.config.TestSecurityConfig;
 import com.task_management_service.backend.test_utils.TestValues;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import com.task_management_service.backend.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,8 +17,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @AfterEach
     void setUp() {

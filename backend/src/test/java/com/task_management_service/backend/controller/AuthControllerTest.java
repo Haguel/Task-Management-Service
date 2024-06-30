@@ -42,7 +42,7 @@ class AuthControllerTest {
 
     @Test
     void shouldSignUpAndReturnToken() throws Exception {
-        String token = TestValues.getToken();
+        String token = TestValues.getSigningToken();
         UserEntity user = TestValues.getUser();
         SignUpUserDto signUpUserDto = new SignUpUserDto(user.getName(), "mike1999", user.getEmail(), user.getPassword());
 
@@ -74,7 +74,7 @@ class AuthControllerTest {
 
     @Test
     void shouldSignInAndReturnToken() throws Exception {
-        String token = TestValues.getToken();
+        String token = TestValues.getSigningToken();
         UserEntity user = TestValues.getUser();
         SignInUserDto signInUserDto = new SignInUserDto(user.getEmail(), user.getPassword());
 

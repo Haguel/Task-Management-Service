@@ -8,6 +8,7 @@ import com.task_management_service.backend.test_utils.TestValues;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -30,18 +32,19 @@ public class AuthServiceTest {
     private PasswordEncoder passwordEncoder;
     @Mock
     private AuthenticationManager authenticationManager;
+    @InjectMocks
     private AuthService authService;
 
     @BeforeEach
     void setUp() {
-        authService = new AuthService(userService, jwtService, passwordEncoder, authenticationManager);
+        reset(userService, jwtService, passwordEncoder, authenticationManager);
     }
 
     @Test
     void shouldSignUpThenReturnJwtToken() {
         UserEntity user = TestValues.getUser();
         SignUpUserDto signUpUserDto = new SignUpUserDto(user.getName(), user.getUsername(), user.getEmail(), user.getPassword());
-        String token = TestValues.getToken();
+        String token = TestValues.getSigningToken();
         String passwordHash = TestValues.getHash();
 
         when(jwtService.generateToken(any()))
@@ -70,7 +73,7 @@ public class AuthServiceTest {
     void shouldSignInAndReturnJwtToken() {
         UserEntity user = TestValues.getUser();
         SignInUserDto signInUserDto = new SignInUserDto(user.getEmail(), user.getPassword());
-        String token = TestValues.getToken();
+        String token = TestValues.getSigningToken();
 
         when(userService.getUserByEmail(any()))
                 .thenReturn(user);
