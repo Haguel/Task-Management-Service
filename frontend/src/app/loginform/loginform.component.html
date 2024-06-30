@@ -1,0 +1,31 @@
+
+<div class="mybody">
+<div class="registration-form">
+  <div class="registration-form-fields">
+    <div class="registration-form-fields-headers">
+      <h3 style="font-size: 1.5vw">Sign in now</h3>
+      <h1 style="font-size: 2vw">Start you journey</h1>
+      <p style="font-size: 0.9vw">Dont have an account? <a href="/signup">Sign up!</a></p>
+    </div>
+    <div class="registration-fields-inputs">
+      <div>
+        <p>Email</p>
+        <input [(ngModel)]="email" class="inputs" type="text" placeholder="Input your email"
+               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+               title="Please enter a valid email address. Example: user@example.com" required/>
+      </div>
+      <div>
+        <p>Password</p>
+        <input [(ngModel)]="password" class="inputs" type="text" placeholder="Input your password"/>
+      </div>
+    </div>
+    <div class="registration-fields-button">
+      <input type="submit" value="Sign in" (click)="loginUser()"/>
+    </div>
+  </div>
+  <div class="registration-form-pic">
+    <h2>Task Manager</h2>
+    <img src="assets/login_icon.png">
+  </div>
+</div>
+</div>
