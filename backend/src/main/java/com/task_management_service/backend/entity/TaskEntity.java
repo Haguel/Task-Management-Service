@@ -1,5 +1,6 @@
 package com.task_management_service.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -49,4 +50,6 @@ public class TaskEntity {
     public void setUntilDate(String iso8601) {
         this.untilDate = Converter.convertToLocalDateTime(iso8601);
     }
+
+    public void setUntilDate(LocalDateTime localDateTime) { this.untilDate = localDateTime; }
 }

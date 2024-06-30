@@ -5,12 +5,12 @@ import com.task_management_service.backend.dto.request.RemoveTaskDto;
 import com.task_management_service.backend.dto.request.UpdateTaskDto;
 import com.task_management_service.backend.entity.TaskEntity;
 import com.task_management_service.backend.entity.UserEntity;
+import com.task_management_service.backend.enumeration.TaskStatus;
+import com.task_management_service.backend.helper.TaskServiceHelper;
 import com.task_management_service.backend.repository.TaskRepository;
 import com.task_management_service.backend.utils.Converter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -20,13 +20,14 @@ import java.util.UUID;
 public class TaskService {
     private final TaskRepository taskRepository;
     private final UserService userService;
+    private final TaskServiceHelper taskServiceHelper;
 
     public TaskEntity create(CreateTaskDto createTaskDto) {
         TaskEntity task = new TaskEntity();
         task.setTitle(createTaskDto.title());
         task.setDescription(createTaskDto.description());
         task.setUntilDate(createTaskDto.untilDate());
-        task.setStatus(createTaskDto.status());
+        task.setStatus(TaskStatus.TODO);
 
         UserEntity currentUser = userService.getCurrentUser();
         currentUser.getTasks().add(task);
@@ -45,15 +46,14 @@ public class TaskService {
 
     public void remove(RemoveTaskDto removeTaskDto) {
         UUID taskId = Converter.convertStringToUUID(removeTaskDto.taskId());
-        TaskEntity task = findTaskAndMakeUserVerification(taskId);
+        taskServiceHelper.findTaskAndMakeUserVerification(taskId);
 
-        task.getUser().getTasks().remove(this);
         taskRepository.deleteById(taskId);
     }
 
     public TaskEntity update(UpdateTaskDto updateTaskDto) {
         UUID taskId = Converter.convertStringToUUID(updateTaskDto.taskId());
-        TaskEntity task = findTaskAndMakeUserVerification(taskId);
+        TaskEntity task = taskServiceHelper.findTaskAndMakeUserVerification(taskId);
 
         task.setTitle(updateTaskDto.title());
         task.setDescription(updateTaskDto.description());
@@ -65,19 +65,5 @@ public class TaskService {
         return task;
     }
 
-    private TaskEntity findTaskAndMakeUserVerification(UUID id) {
-        TaskEntity task = taskRepository.findById(id).orElse(null);
 
-        if(task == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Task with provided id wasn't found");
-        }
-
-        UserEntity user = userService.getCurrentUser();
-
-        if(!task.getUser().getId().equals(user.getId())){
-            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "User can't manage tasks of another user");
-        }
-
-        return task;
-    }
 }
