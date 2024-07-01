@@ -1,0 +1,38 @@
+@font-face {
+  font-family: 'BoldRounded';
+  src: url('../../fonts/bolt-rounded/Bolt Rounded.woff2') format('woff2'),
+  url('../../fonts/bolt-rounded/Bolt Rounded.woff') format('woff'),
+  url('../../fonts/bolt-rounded/Bolt Rounded.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.my-body {
+  background: #1B2727;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100vh;
+}
+.acc-container {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  height: 48vw;
+  background-color: rgba(17, 25, 25, 0.8);
+  align-self: center;
+  border-radius: 1vw;
+  -webkit-box-shadow: 0px 1px 20px -7px rgba(0,0,0,0.42);
+  -moz-box-shadow: 0px 1px 20px -7px rgba(0,0,0,0.42);
+  box-shadow: 0px 1px 20px -7px rgba(0,0,0,0.42);
+  padding: 3vw;
+  overflow-x: auto;
+  gap: 1vw;
+  margin-top: 4vw;
+  color: #D5DDDF;
+  font-family: 'BoldRounded';
+}
+.acc-header{
+  display: flex;
+  flex-direction: column;
+}

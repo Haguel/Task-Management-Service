@@ -1,0 +1,27 @@
+<div class="my-modal-body">
+  <div class="my-modal-header">
+    <h2>Create your new task here</h2>
+    <p>Complete simple form to get started!</p>
+    <hr>
+  </div>
+  <div class="my-modal-fields">
+    <div class="input-group">
+      <p [ngClass]="{'invalid': !isValidTitle}">Title</p>
+      <input (input)="checkTaskTitleValid()" type="text" placeholder="Input task title" [(ngModel)]="taskTitle"/>
+    </div>
+    <div class="input-group">
+      <p>Description</p>
+      <textarea placeholder="Input task description" [(ngModel)]="taskDescription"></textarea>
+    </div>
+    <div class="input-group">
+      <p [ngClass]="{'invalid': !isValidDeadline}">Due to</p>
+      <input (input)="checkDeadlineValid($event)" type="datetime-local" [(ngModel)]="taskDeadline"/>
+    </div>
+    <div class="buttons-row">
+      <input type="button" class="close-btn" value="Close" (click)="close()"/>
+      <input [ngClass]="{'disabled': !isValidDeadline || !isValidTitle}"
+             [disabled]="!isValidDeadline || !isValidTitle" type="button"
+             class="accept-btn" value="Create" (click)="createClick()"/>
+    </div>
+  </div>
+</div>

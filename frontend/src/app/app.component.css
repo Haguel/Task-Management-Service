@@ -1,0 +1,37 @@
+@font-face {
+  font-family: 'BoldRounded';
+  src: url('../fonts/bolt-rounded/Bolt Rounded.woff2') format('woff2'),
+  url('../fonts/bolt-rounded/Bolt Rounded.woff') format('woff'),
+  url('../fonts/bolt-rounded/Bolt Rounded.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.my-navbar {
+  font-family: 'BoldRounded';
+  display: flex;
+  flex-direction: row;
+  height: 3vw;
+  background-color: #111919;
+  gap: 2vw;
+  padding-left: 4.5vw;
+  padding-right: 4.5vw;
+  align-items: center;
+}
+.my-navbar a {
+  text-decoration: none;
+  transition: ease-in-out 0.2s;
+  font-size: 1vw;
+  color: #B2C5B2;
+}
+.my-navbar a:hover {
+  color: #D5DDDF;
+}
+.account-info-navbar {
+  display: flex;
+  flex-direction: row;
+  gap: 1vw;
+  margin-left: auto;
+}
+.hidden {
+  display: none;
+}
