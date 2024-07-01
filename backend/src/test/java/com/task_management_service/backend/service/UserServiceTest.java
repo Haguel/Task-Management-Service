@@ -45,21 +45,6 @@ public class UserServiceTest {
     }
 
     @Test
-    void shouldReturnUserByEmail() {
-        UserEntity user = TestValues.getUser();
-
-        when(userRepository.findUserEntityByEmail(anyString()))
-                .thenReturn(Optional.of(user));
-
-        UserEntity returnedUser = userService.getUserByEmail(user.getEmail());
-
-        assertThat(user).isNotNull();
-        assertThat(user.getUsername()).isEqualTo(returnedUser.getUsername());
-        assertThat(user.getEmail()).isEqualTo(returnedUser.getEmail());
-        assertThat(user.getPassword()).isEqualTo(returnedUser.getPassword());
-    }
-
-    @Test
     void shouldSaveUserToDb() {
         UserEntity user = TestValues.getUser();
 

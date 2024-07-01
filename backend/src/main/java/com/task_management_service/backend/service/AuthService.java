@@ -42,7 +42,7 @@ public class AuthService {
     }
 
     public JwtAuthDto signIn(SignInUserDto signInUserDto) {
-        UserEntity user = userService.getUserByEmail(signInUserDto.email());
+        UserEntity user = userService.getUserByUsernameOrEmail(signInUserDto.email(), signInUserDto.email());
 
         if(user == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Can not find authenticated user by provided email");

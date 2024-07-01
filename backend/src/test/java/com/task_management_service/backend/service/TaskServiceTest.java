@@ -45,8 +45,7 @@ class TaskServiceTest {
         CreateTaskDto createTaskDto = new CreateTaskDto(
                 testTask.getTitle(),
                 testTask.getDescription(),
-                Converter.convertToIso8601(testTask.getUntilDate()),
-                testTask.getStatus()
+                Converter.convertToIso8601(testTask.getUntilDate())
         );
 
         when(userService.getCurrentUser()).thenReturn(testUser);

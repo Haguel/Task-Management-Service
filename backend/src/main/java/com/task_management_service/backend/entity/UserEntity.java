@@ -70,7 +70,7 @@ public class UserEntity implements UserDetails {
     public String getPassword() { return passwordHash;}
 
     @Override
-    public String getUsername() { return email; }
+    public String getUsername() { return username; }
 
     @Override
     public boolean isAccountNonExpired() {

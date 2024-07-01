@@ -19,11 +19,6 @@ public class UserService {
                 .orElse(null);
     }
 
-    public UserEntity getUserByEmail(String email) {
-        return userRepository.findUserEntityByEmail(email)
-                .orElse(null);
-    }
-
     public ReturnUserDto getUser(String username, String email) {
         UserEntity user = getUserByUsernameOrEmail(username, email);
 
@@ -43,9 +38,9 @@ public class UserService {
     }
 
     public UserEntity getCurrentUser() {
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        return getUserByEmail(email);
+        return getUserByUsernameOrEmail(username, username);
     }
 
     public void saveUserToDb(UserEntity user) {
