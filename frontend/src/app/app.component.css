@@ -32,3 +32,6 @@
   gap: 1vw;
   margin-left: auto;
 }
+.hidden {
+  display: none;
+}

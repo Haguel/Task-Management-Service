@@ -12,6 +12,7 @@ import { LoginformComponent } from './loginform/loginform.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreatetaskwindowComponent } from './createtaskwindow/createtaskwindow.component';
 import {HttpClientModule} from "@angular/common/http";
+import { AccountpageComponent } from './accountpage/accountpage.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {HttpClientModule} from "@angular/common/http";
     LoginformComponent,
     DashboardComponent,
     CreatetaskwindowComponent,
+    AccountpageComponent,
   ],
   imports: [
     BrowserModule,

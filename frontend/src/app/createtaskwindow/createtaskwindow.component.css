@@ -1,0 +1,141 @@
+@font-face {
+  font-family: 'BoldRounded';
+  src: url('../../fonts/bolt-rounded/Bolt Rounded.woff2') format('woff2'),
+  url('../../fonts/bolt-rounded/Bolt Rounded.woff') format('woff'),
+  url('../../fonts/bolt-rounded/Bolt Rounded.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.my-modal-body {
+  display: flex;
+  flex-direction: column;
+  background-color: #3C5148;
+  height: 70vh;
+  border-radius: 0.2vw;
+  padding: 2.5vw;
+  color: white;
+  font-family: 'BoldRounded', sans-serif;
+  overflow: auto;
+}
+.my-modal-header {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+.my-modal-header h1 {
+  font-size: 1vw;
+  color: #D5DDDF;
+}
+.my-modal-header p {
+  color: #a7acae;
+}
+.my-modal-header hr {
+  margin-top: -0.2vw;
+  width: 100%;
+}
+
+.my-modal-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+}
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+.input-group p {
+  font-size: 1.2vw;
+}
+.input-group input {
+  background: #364940;
+  border: none;
+  border-radius: 0.2vw;
+  width: 100%;
+  height: 2.5vw;
+  color: #D5DDDF;
+  padding-left: 0.5vw;
+}
+.input-group textarea {
+  background: #364940;
+  border: none;
+  border-radius: 0.2vw;
+  width: 100%;
+  min-height: 7vw;
+  max-height: 7vw;
+  color: #D5DDDF;
+  padding-left: 0.5vw;
+}
+.panels-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+  width: 100%;
+  border-radius: 0.2vw;
+  height: 10vw;
+  background-color: #364940;
+  padding: 1vw;
+}
+.panels-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1vw;
+}
+.panel {
+  width: 50%;
+  height: 3.5vw;
+  border-radius: 0.2vw;
+  background-color: #31433b;
+}
+.panel {
+  width: 50%;
+  height: 3.5vw;
+  border-radius: 0.2vw;
+  background-color: #31433b;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+}
+.panel.selected {
+  background-color: #283730;
+  color: white;
+}
+
+.buttons-row {
+  display: flex;
+  flex-direction: row;
+  gap: 1vw;
+  margin-top: 1.5vw;
+}
+.accept-btn {
+  height: 3.5vw;
+  width: 50%;
+  border-radius: 0.2vw;
+  border: none;
+  background-color: #D5DDDF;
+  color: #1B2727;
+  transition: ease-in-out 0.2s;
+}
+.accept-btn:hover {
+  background-color: #bbc1c3;
+}
+.close-btn {
+  height: 3.5vw;
+  width: 50%;
+  border-radius: 0.2vw;
+  border: none;
+  background-color: #1B2727;
+  color: #D5DDDF;
+  transition: ease-in-out 0.2s;
+}
+.close-btn:hover {
+  background-color: #293a3a;
+}
+.invalid {
+  color: #f4a8a8;
+}
+.disabled {
+  background-color: #a1a7a8;
+}
