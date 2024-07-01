@@ -1,6 +1,7 @@
 package com.task_management_service.backend.helper;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -18,9 +19,11 @@ public class JwtServiceHelper {
     private String jwtSigningToken;
     
     public boolean isTokenExpired(String jwtToken) {
-        boolean test = extractExpiration(jwtToken).before(new Date());
-
-        return test;
+        try {
+            return extractExpiration(jwtToken).before(new Date());
+        } catch (ExpiredJwtException exception) {
+            return true;
+        }
     }
 
     public Date extractExpiration(String jwtToken) {

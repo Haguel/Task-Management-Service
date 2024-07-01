@@ -37,13 +37,13 @@ public class UserRepositoryTest {
     }
 
     @Test
-    void findUserEntityByEmail() {
+    void findUserEntityByUsername() {
         UserEntity user = TestValues.getUser();
 
         userRepository.save(user);
 
         UserEntity returned = userRepository
-                .findUserEntityByEmail(user.getEmail()).orElse(null);
+                .findUserEntityByUsername(user.getUsername()).orElse(null);
 
         assertThat(returned).isNotNull();
         assertThat(returned.getId()).isEqualTo(user.getId());

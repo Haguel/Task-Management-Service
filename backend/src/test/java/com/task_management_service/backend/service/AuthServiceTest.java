@@ -75,7 +75,7 @@ public class AuthServiceTest {
         SignInUserDto signInUserDto = new SignInUserDto(user.getEmail(), user.getPassword());
         String token = TestValues.getSigningToken();
 
-        when(userService.getUserByEmail(any()))
+        when(userService.getUserByUsernameOrEmail(any(), any()))
                 .thenReturn(user);
         when(jwtService.generateToken(any()))
                 .thenReturn(token);
@@ -91,7 +91,7 @@ public class AuthServiceTest {
         UserEntity user = TestValues.getUser();
         SignInUserDto signInUserDto = new SignInUserDto(user.getEmail(), user.getPassword());
 
-        when(userService.getUserByEmail(anyString()))
+        when(userService.getUserByUsernameOrEmail(any(), any()))
                 .thenReturn(null);
 
         assertThrows(ResponseStatusException.class, () -> authService.signIn(signInUserDto));

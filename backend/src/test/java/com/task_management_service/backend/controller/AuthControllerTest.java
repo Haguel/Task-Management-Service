@@ -18,14 +18,13 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(MockitoExtension.class)
-//@WebMvcTest(AuthController.class)
-//@AutoConfigureMockMvc(addFilters = false)
 class AuthControllerTest {
     @Mock
     private AuthService authService;
@@ -36,6 +35,8 @@ class AuthControllerTest {
 
     @BeforeEach
     void setUp() {
+        reset(authService);
+
         mockMvc = MockMvcBuilders.standaloneSetup(authController).build();
         objectMapper = new ObjectMapper();
     }
