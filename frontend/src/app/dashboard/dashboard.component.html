@@ -1,28 +1,58 @@
 <div class="mybody">
   <div class="header-field">
-    <h1>Hello {{currentUser.name}}</h1>
+    <h1>Hello {{currentUser.name}}!</h1>
     <div class="right-side">
       <button class="filter-btn" type="button"><img alt="filter_icon" src="assets/filter_icon.png"></button>
       <div class="search-container">
-        <button class="search-btn" type="button"><img alt="search_icon" src="assets/search_icon.png"></button>
-        <input type="text" placeholder="Search here..."/>
+        <button class="search-btn" type="button" (click)="searchBtnClick()"><img alt="search_icon" src="assets/search_icon.png"></button>
+        <input [(ngModel)]="searchName" type="text" placeholder="Search by name..."/>
       </div>
-      <input type="button" (click)="openModal()" value="Add task"/>
+      <input type="button" (click)="openCreateModal()" value="Add task"/>
     </div>
   </div>
   <div class="dashboard">
     <div class="dashboard-classes">
-      <div class="dashboard-class" *ngFor="let new_class of status_columns_list | keyvalue: originalOrder">
-        <p>{{new_class.key}}</p>
-        <div [ngClass]="getClass(new_class.key)"></div>
+      <div class="dashboard-class" *ngFor="let new_class of status_list">
+        <p>{{new_class}}</p>
+        <div [ngClass]="getClass(new_class)"></div>
       </div>
     </div>
     <div class="dashboard-columns" cdkDropListGroup>
-      <div *ngFor="let column of status_columns_list |  keyvalue: originalOrder" class="dashboard-column">
-        <div [cdkDropListData]="column.value" cdkDropList class="dashboard-list" (cdkDropListDropped)="drop($event)">
-          <div class="task" draggable="true" *ngFor="let item of column.value" cdkDrag>
+      <div class="dashboard-column">
+        <div [cdkDropListData]="to_do_list" cdkDropList class="dashboard-list" (cdkDropListDropped)="drop($event)" id="cdk-drop-list-0">
+          <div (click)="openRedactModal(item)" *ngFor="let item of to_do_list" class="task" cdkDrag [attr.data-task]="item | json">
             <div class="task-header">
-              <p>{{item}}</p>
+              <p>{{ item.title }}</p>
+            </div>
+            <div class="timeline-row-green"></div>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-column">
+        <div [cdkDropListData]="doing_list" cdkDropList class="dashboard-list" (cdkDropListDropped)="drop($event)" id="cdk-drop-list-1">
+          <div (click)="openRedactModal(item)" *ngFor="let item of doing_list" class="task" cdkDrag [attr.data-task]="item | json">
+            <div class="task-header">
+              <p>{{ item.title }}</p>
+            </div>
+            <div class="timeline-row-green"></div>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-column">
+        <div [cdkDropListData]="finished_list" cdkDropList class="dashboard-list" (cdkDropListDropped)="drop($event)" id="cdk-drop-list-2">
+          <div (click)="openRedactModal(item)" *ngFor="let item of finished_list" class="task" cdkDrag [attr.data-task]="item | json">
+            <div class="task-header">
+              <p>{{ item.title }}</p>
+            </div>
+            <div class="timeline-row-green"></div>
+          </div>
+        </div>
+      </div>
+      <div class="dashboard-column">
+        <div [cdkDropListData]="expired_list" cdkDropList class="dashboard-list" (cdkDropListDropped)="drop($event)" id="cdk-drop-list-3">
+          <div (click)="openRedactModal(item)" *ngFor="let item of expired_list" class="task" cdkDrag [attr.data-task]="item | json">
+            <div class="task-header">
+              <p>{{ item.title }}</p>
             </div>
             <div class="timeline-row-green"></div>
           </div>

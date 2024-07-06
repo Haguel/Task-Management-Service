@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
   background-color: #3C5148;
-  height: 72vh;
+  height: 66vh;
   border-radius: 0.2vw;
   padding: 2.5vw;
   color: white;
@@ -27,11 +27,7 @@
   font-size: 1vw;
   color: #D5DDDF;
 }
-.my-modal-header p {
-  color: #a7acae;
-}
 .my-modal-header hr {
-  margin-top: -0.2vw;
   width: 100%;
 }
 
@@ -111,7 +107,7 @@
 }
 .accept-btn {
   height: 3.5vw;
-  width: 50%;
+  width: 33.3%;
   border-radius: 0.2vw;
   border: none;
   background-color: #D5DDDF;
@@ -123,7 +119,7 @@
 }
 .close-btn {
   height: 3.5vw;
-  width: 50%;
+  width: 33.3%;
   border-radius: 0.2vw;
   border: none;
   background-color: #1B2727;
@@ -132,6 +128,18 @@
 }
 .close-btn:hover {
   background-color: #293a3a;
+}
+.delete-btn {
+  height: 3.5vw;
+  width: 33.3%;
+  border-radius: 0.2vw;
+  border: none;
+  background-color: #2f3c3c;
+  color: #D5DDDF;
+  transition: ease-in-out 0.2s;
+}
+.delete-btn:hover {
+  background-color: #364545;
 }
 .invalid {
   color: #f4a8a8;

@@ -9,8 +9,6 @@ export class AuthService {
   private apiUrl = 'http://localhost:8080/auth';
   private getUserUrl = 'http://localhost:8080/users/';
   private userSubject = new BehaviorSubject<any>(null)
-  private authStatusSubject = new BehaviorSubject<boolean>(this.hasToken());
-  public authStatus$ = this.authStatusSubject.asObservable();
 
 
   constructor(private http: HttpClient) {
@@ -39,7 +37,7 @@ export class AuthService {
   }
 
   getUserInfo(email: string): Observable<any> {
-    const token = localStorage.getItem('token'); // Получение токена из localStorage
+    const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     const url = `${this.getUserUrl}${email}`;
 
@@ -50,12 +48,4 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    this.authStatusSubject.next(false); // Уведомляем об изменении состояния аутентификации
-  }
-
-  getCurrentUser(): any {
-    console.log(this.userSubject.value);
-  }
 }

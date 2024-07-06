@@ -1,8 +1,49 @@
 <div class="my-body">
   <div class="acc-container">
     <div class="acc-header">
-      <h1>Welcome back, Alexandr!</h1>
+      <h1>{{currentUser.name}}</h1>
       <hr>
+    </div>
+    <div class="acc-fields">
+      <div class="acc-field">
+        <span>{{currentUser.email}}</span>
+        <img src="assets/mail_icon.png" alt="email_icon"/>
+      </div>
+      <div class="acc-field">
+        <span>{{currentUser.username}}</span>
+        <img src="assets/username_icon.png" alt="email_icon"/>
+      </div>
+    </div>
+    <div class="acc-panels">
+      <div class="acc-panel">
+        <p>Tasks count</p>
+        <div class="task-count">
+          <p>{{all_tasks_count}}</p>
+        </div>
+      </div>
+      <div class="acc-panel">
+        <p>Complete tasks</p>
+        <div class="task-count">
+          <p>{{doing_tasks_count}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="acc-panels">
+      <div class="acc-panel">
+        <p>In progress tasks</p>
+        <div class="task-count">
+          <p>{{finished_tasks_count}}</p>
+        </div>
+      </div>
+      <div class="acc-panel">
+        <p>Expired tasks</p>
+        <div class="task-count">
+          <p>{{expired_tasks_count}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="acc-btn">
+      <input class="logout-btn" type="button" value="Logout" (click)="logout()"/>
     </div>
   </div>
 </div>

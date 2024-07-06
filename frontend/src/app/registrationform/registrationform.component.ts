@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {AuthService} from "../auth.service";
+import {Router} from "@angular/router";
+import {AppComponent} from "../app.component";
 
 @Component({
   selector: 'app-registrationform',
@@ -13,37 +15,10 @@ export class RegistrationformComponent {
   password: string = '';
   email: string = '';
 
-  isValidEmail: boolean = true;
-  isValidPassword: boolean = true;
-  isValidUsername: boolean = true;
-  isValidName: boolean = true;
-  isValidForm: boolean = true;
-
   registrationResponse: any;
   token: string = '';
 
-  constructor(private authService: AuthService) { }
-
-  checkEmailValid() {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    this.isValidEmail = emailPattern.test(this.email);
-  }
-
-  checkPasswordValid() {
-    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,50}$/;
-    this.isValidPassword = passwordRegex.test(this.password);
-  }
-
-  checkUsernameValid() {
-    const usernameRegex = /^[a-zA-Z0-9]{4,20}$/;
-    this.isValidUsername = usernameRegex.test(this.username);
-  }
-
-  checkNameValid() {
-    if (this.name.length <= 1) {
-      this.isValidName = false;
-    } else this.isValidName = true;
-  }
+  constructor(private authService: AuthService, private router: Router, private appComponent: AppComponent) { }
 
   registerUser() {
     this.authService.registerUser(this.name, this.username, this.email, this.password)
@@ -53,32 +28,26 @@ export class RegistrationformComponent {
           this.registrationResponse = response;
           console.log('Registration successful:', response);
           localStorage.setItem('token', this.token);
+          if (this.token != null) {
+            this.authService.getUserInfo(this.email).subscribe(
+              data => {
+                this.appComponent.updateUserData(data);
+                this.router.navigate(['/dashboard']);
+              }
+            );
+          }
         },
         (error) => {
-          console.error('Registration failed:', error);
+          if (error.status == 400) {
+            alert("Error, enter valid data");
+          } else if (error.status == 409) {
+            alert("Error, user with such username or email already exists");
+          }
         }
       );
   }
 
   signUpClick(): void {
-    if (this.username == '') {
-      this.isValidUsername = false
-      this.isValidForm = false
-    } if (this.name == '') {
-      this.isValidName = false
-      this.isValidForm = false
-    } if (this.email == '') {
-      this.isValidEmail = false
-      this.isValidForm = false
-    } if (this.password == '') {
-      this.isValidPassword = false
-      this.isValidForm = false
-    }
-    if (this.isValidForm) {
-      this.registerUser()
-    }
-    else {
-      alert("Please enter a valid data");
-    }
+    this.registerUser()
   }
 }

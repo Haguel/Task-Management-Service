@@ -17,8 +17,8 @@
 .acc-container {
   display: flex;
   flex-direction: column;
-  width: 60%;
-  height: 48vw;
+  width: 40%;
+  height: 50vw;
   background-color: rgba(17, 25, 25, 0.8);
   align-self: center;
   border-radius: 1vw;
@@ -35,4 +35,89 @@
 .acc-header{
   display: flex;
   flex-direction: column;
+}
+.acc-header h1 {
+  align-self: center;
+  font-size: 2.4vw;
+}
+.acc-header h2{
+  align-self: center;
+  font-size: 1.2vw;
+  color: #a1a7a8;
+}
+.acc-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 2vw;
+}
+.acc-fields span {
+  align-content: center;
+}
+.acc-panels {
+  display: flex;
+  flex-direction: row;
+  gap: 2vw;
+  margin-top: 1vw;
+}
+.acc-panel {
+  width: 100%;
+  height: 10vw;
+  background-color: rgba(33, 43, 43, 0.8);
+  border-radius: 1vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5vw;
+}
+.acc-panel p {
+  font-size: 1.4vw;
+}
+.acc-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 1vw;
+}
+.logout-btn {
+  width: 40%;
+  height: 3vw;
+  justify-self: center;
+  border-radius: 0.7vw;
+  border: none;
+  background-color: #354949;
+  color: #D5DDDF;
+  transition: ease-in-out 0.2s;
+}
+.logout-btn:hover {
+  background-color: #405959;
+}
+.acc-field {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 3vw;
+  background-color: rgba(33, 43, 43, 0.8);
+  border-radius: 1vw;
+  padding-left: 1vw;
+  padding-right: 1vw;
+}
+.acc-field img {
+  margin-left: auto;
+  width: 1.5vw;
+  height: 1.5vw;
+  align-self: center;
+}
+.task-count {
+  width: 6vw;
+  height: 6vw;
+  background-color: transparent;
+  border: 0.3vw solid #D5DDDF;
+  border-radius: 10vw;
+  margin-top: -0.5vw;
+  text-align: center;
+  align-content: center;
+  padding-top: 1vw;
+}
+.task-count p {
+  font-size: 2vw;
 }

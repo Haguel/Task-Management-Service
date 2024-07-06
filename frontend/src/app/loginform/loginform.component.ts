@@ -13,7 +13,6 @@ export class LoginformComponent {
   email: string = '';
   password: string = '';
   token: string = '';
-  errorMessage: string = '';
   status: string = '';
 
   constructor(private authService: AuthService, private router: Router, private appComponent: AppComponent) {}
@@ -37,8 +36,9 @@ export class LoginformComponent {
           }
         },
         (error: HttpErrorResponse) => {
-          console.error('Login failed:', error);
-          this.errorMessage = 'Automatic login failed. Please log in manually.';
+          if (error.status == 400) alert("Error, invalid data provided!")
+          else if (error.status == 401) alert("Error, incorrect username or email or password!");
+          else if (error.status == 404) alert("Error, can not find authenticated user by provided email!");
         }
       );
   }

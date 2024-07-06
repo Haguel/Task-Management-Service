@@ -7,8 +7,7 @@
     <a routerLink="/login">Login</a>
   </div>
   <div *ngIf="currentUser" class="account-info-navbar">
-    <a routerLink="/account">{{ currentUser.email }}</a>
-    <a routerLink="" (click)="logout()">Logout</a>
+    <a routerLink="/account">{{ currentUser.username }}</a>
   </div>
 </div>
 <router-outlet></router-outlet>

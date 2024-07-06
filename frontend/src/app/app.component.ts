@@ -30,12 +30,6 @@ export class AppComponent implements OnInit {
     console.log(this.currentUser);
   }
 
-  logout() {
-    this.currentUser = null;
-    localStorage.removeItem('userData');
-    this.currentUserSubject.next(this.currentUser);
-  }
-
   updateUserData(userData: any) {
     this.currentUser = userData;
     this.currentUserSubject.next(this.currentUser);

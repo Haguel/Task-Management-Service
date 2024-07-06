@@ -1,29 +1,31 @@
 import { Component } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import {BsModalService, BsModalRef, ModalOptions} from 'ngx-bootstrap/modal';
 import {CreatetaskwindowComponent} from "../createtaskwindow/createtaskwindow.component";
 import {KeyValue} from "@angular/common";
-import {AuthService} from "../auth.service";
 import {OnInit} from "@angular/core";
-import {BehaviorSubject} from "rxjs";
+import {TaskService} from "../task.service";
+import {RedacttaskwindowComponent} from "../redacttaskwindow/redacttaskwindow.component";
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
   bsModalRef!: BsModalRef;
   currentUser: any;
+  searchName: string = '';
+  status_list = ['To do', 'Doing', 'Finished', 'Expired'];
 
-  status_columns_list = {
-    'To do': ['Task 1', 'Task 2', 'Task 3'],
-    'Doing': [],
-    'Finished': [],
-    'Expired': ['Task 4', 'Task 5']
-  };
+  to_do_list : any[] = [];
+  doing_list : any[] = [];
+  finished_list : any[] = [];
+  expired_list : any[] = [];
 
-  constructor(private authService: AuthService,private modalService: BsModalService) {
+
+
+  constructor(private taskService: TaskService,private modalService: BsModalService) {
   }
 
   ngOnInit() {
@@ -31,21 +33,90 @@ export class DashboardComponent {
 
     if (this.currentUser) {
       this.currentUser = JSON.parse(this.currentUser);
-      console.log(this.currentUser);
     } else {
       console.log('No user data found in localStorage');
     }
+
+    this.getUserTasks(this.searchName);
+
+    this.taskService.toDoList$.subscribe(tasks => this.to_do_list = tasks);
+    this.taskService.doingList$.subscribe(tasks => this.doing_list = tasks);
+    this.taskService.finishedList$.subscribe(tasks => this.finished_list = tasks);
+    this.taskService.expiredList$.subscribe(tasks => this.expired_list = tasks);
   }
 
+  getUserTasks(filter: string) {
+    this.taskService.getTasks().subscribe(
+      response => {
+        let toDoTasks: any[] = [];
+        let doingTasks : any[] = [];
+        let finishedTasks : any[] = [];
+        let expiredTasks : any[] = [];
 
-  originalOrder = (a: KeyValue<string, string[]>, b: KeyValue<string, string[]>): number => {
-    const order = ['To do', 'Doing', 'Finished', 'Expired'];
-    return order.indexOf(a.key) - order.indexOf(b.key);
-  };
+        for (let task of response) {
+          switch (task.status) {
+            case "TODO":
+              this.checkAndPushByFilter(task.title, task, toDoTasks)
+              break;
+            case "DOING":
+              this.checkAndPushByFilter(task.title, task, doingTasks)
+              break;
+            case "FINISHED":
+              this.checkAndPushByFilter(task.title, task, finishedTasks)
+              break;
+            case "EXPIRED":
+              this.checkAndPushByFilter(task.title, task, expiredTasks)
+              break;
+          }
+        }
 
+        this.taskService.updateToDoList(toDoTasks);
+        this.taskService.updateDoingList(doingTasks);
+        this.taskService.updateFinishedList(finishedTasks);
+        this.taskService.updateExpiredList(expiredTasks);
 
-  openModal() {
-    this.bsModalRef = this.modalService.show(CreatetaskwindowComponent);
+        let tasksCountData = {
+          all: toDoTasks.length + doingTasks.length + finishedTasks.length + expiredTasks.length,
+          doing: doingTasks.length,
+          finished: finishedTasks.length,
+          expired: expiredTasks.length
+        };
+        console.log(tasksCountData)
+        localStorage.setItem('tasksCountData', JSON.stringify(tasksCountData));
+      },
+      error => {
+        if (error.status == 401) {
+          alert("Error, request provided without token!");
+        }
+      }
+    );
+  }
+
+  checkAndPushByFilter(title: string, task: string, status_list: any[]) {
+    if (this.searchName.toLowerCase() !== '') {
+      if (title.toLowerCase().includes(this.searchName)) {
+        status_list.push(task);
+      }
+    } else {
+      status_list.push(task);
+    }
+  }
+
+  openCreateModal() {
+    const config: ModalOptions = {
+      backdrop: 'static' as 'static',
+      keyboard: false,
+    };
+    this.bsModalRef = this.modalService.show(CreatetaskwindowComponent, config);
+  }
+
+  openRedactModal(task: any) {
+    const config: ModalOptions = {
+      backdrop: 'static' as 'static',
+      keyboard: false,
+    };
+    localStorage.setItem('currentTaskForRedact', JSON.stringify(task));
+    this.bsModalRef = this.modalService.show(RedacttaskwindowComponent, config);
   }
 
 
@@ -64,14 +135,51 @@ export class DashboardComponent {
     }
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      transferArrayItem(event.previousContainer.data,
+      const task = event.previousContainer.data[event.previousIndex];
+      transferArrayItem(
+        event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex);
+        event.currentIndex
+      );
+
+      console.log(task)
+
+      let newStatus: string;
+      switch (event.container.id) {
+        case 'cdk-drop-list-0':
+          newStatus = 'TODO';
+          break;
+        case 'cdk-drop-list-1':
+          newStatus = 'DOING';
+          break;
+        case 'cdk-drop-list-2':
+          newStatus = 'FINISHED';
+          break;
+        case 'cdk-drop-list-3':
+          newStatus = 'EXPIRED';
+          break;
+        default:
+          newStatus = task.status;
+      }
+      task.status = newStatus;
+
+      this.taskService.updateTaskStatus(task).subscribe(
+        response => {
+          console.log('Task status updated successfully:', response);
+        },
+        error => {
+          console.error('Error updating task status:', error);
+        }
+      );
     }
+  }
+
+  searchBtnClick() {
+    this.getUserTasks(this.searchName)
   }
 }

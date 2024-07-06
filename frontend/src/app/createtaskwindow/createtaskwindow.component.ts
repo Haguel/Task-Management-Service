@@ -4,6 +4,7 @@ import { HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {catchError, Observable, throwError} from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 import { TaskService } from '../task.service';
+import {response} from "express";
 
 @Component({
   selector: 'app-createtaskwindow',
@@ -16,8 +17,6 @@ export class CreatetaskwindowComponent implements OnInit {
   taskTitle: string = '';
   taskDescription: string = '';
   taskDeadline: string = '';
-  isValidTitle: boolean = true;
-  isValidDeadline: boolean = true;
 
   serverStatus: string = '';
   constructor(public bsModalRef: BsModalRef, private http: HttpClient,
@@ -32,66 +31,24 @@ export class CreatetaskwindowComponent implements OnInit {
   close() {
     this.bsModalRef.hide();
   }
-  checkTaskTitleValid() {
-    if (this.taskTitle.length <= 1) {
-      this.isValidTitle = false;
-    } else {
-      this.isValidTitle = true;
-    }
-  }
-  checkDeadlineValid(event: any) {
-    this.taskDeadline = event.target.value;
-    if (this.taskDeadline.length > 0) {
-      this.isValidDeadline = true;
-    } else {
-      this.isValidDeadline = false;
-    }
-  }
+
   createClick(): void {
-    if (this.taskTitle == '' || this.taskDescription == '' || this.taskDeadline == '') {
-      this.isValidTitle = false
-      this.isValidDeadline = false
-      alert('Please enter a valid data');
+    let taskEntity = {
+      'title': this.taskTitle,
+      'description': this.taskDescription,
+      'untilDate': this.convertToISO(this.taskDeadline),
+      "status": "TODO"
     }
-    else {
-      let taskEntity = {
-        'id': this.getUuid(),
-        'title': this.taskTitle,
-        'description': this.taskDescription,
-        'untilDate': this.convertToISO(this.taskDeadline),
-        'status': 'todo',
-      }
-      this.getTasks();
-    }
-  }
-
-  createTask(taskData: any): Observable<any> {
-    return this.http.post<any>(this.baseUrl, taskData, { observe: 'response' })
-      .pipe(
-        catchError(this.handleError)
-      );
-  }
-
-  responseStatus: number | null = null;
-  errorMessage: string | null = null;
-  tasks: any[] = [];
-
-  getTasks() {
-    this.taskService.getTasks().subscribe(
+    this.taskService.createTask(taskEntity).subscribe(
       response => {
-        this.tasks = response.body;
-        this.responseStatus = response.status;
-        this.errorMessage = null;
+        this.close();
       },
-      error => {
-        this.responseStatus = null;
-        this.errorMessage = error;
+      (error) => {
+        if (error.status == 400) alert("Error, invalid data provided!");
+        else if (error.status == 401) alert("Error, request provided without token!");
       }
-    );
-  }
+    )
 
-  getUuid() : string {
-    return uuidv4();
   }
 
   convertToISO = (dateString: string): string => {
@@ -99,17 +56,6 @@ export class CreatetaskwindowComponent implements OnInit {
     return date.toISOString();
   };
 
-  private handleError(error: HttpErrorResponse) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Client-side error
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      // Server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return throwError(errorMessage);
-  }
 
 
 }

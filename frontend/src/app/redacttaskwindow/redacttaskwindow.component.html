@@ -1,7 +1,6 @@
 <div class="my-modal-body">
   <div class="my-modal-header">
-    <h2>Create your new task here</h2>
-    <p>Complete simple form to get started!</p>
+    <h2>Redact task</h2>
     <hr>
   </div>
   <div class="my-modal-fields">
@@ -19,7 +18,8 @@
     </div>
     <div class="buttons-row">
       <input type="button" class="close-btn" value="Close" (click)="close()"/>
-      <input type="button" class="accept-btn" value="Create" (click)="createClick()"/>
+      <input type="button" class="delete-btn" value="Delete" (click)="delete()"/>
+      <input type="button" class="accept-btn" value="Save" (click)="save()"/>
     </div>
   </div>
 </div>
