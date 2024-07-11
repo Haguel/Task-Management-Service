@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit{
   searchName: string = '';
   status_list = ['To do', 'Doing', 'Finished', 'Expired'];
 
+
   to_do_list : any[] = [];
   doing_list : any[] = [];
   finished_list : any[] = [];

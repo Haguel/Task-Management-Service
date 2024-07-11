@@ -35,7 +35,7 @@ export class LoginformComponent {
             );
           }
         },
-        (error: HttpErrorResponse) => {
+        (error) => {
           if (error.status == 400) alert("Error, invalid data provided!")
           else if (error.status == 401) alert("Error, incorrect username or email or password!");
           else if (error.status == 404) alert("Error, can not find authenticated user by provided email!");
