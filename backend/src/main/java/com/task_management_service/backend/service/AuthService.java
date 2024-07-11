@@ -49,7 +49,7 @@ public class AuthService {
         }
 
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                signInUserDto.email(),
+                user.getUsername(),
                 signInUserDto.password()
         ));
 
