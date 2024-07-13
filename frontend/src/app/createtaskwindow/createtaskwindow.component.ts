@@ -37,7 +37,6 @@ export class CreatetaskwindowComponent implements OnInit {
       'title': this.taskTitle,
       'description': this.taskDescription,
       'untilDate': this.convertToISO(this.taskDeadline),
-      "status": "TODO"
     }
     this.taskService.createTask(taskEntity).subscribe(
       response => {

@@ -26,11 +26,15 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-
         httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/auth/**", apiDocsPath + "/**", swaggerGeneralPath + "/**").permitAll();
+                    auth.requestMatchers(
+                            "/auth/**",
+                            apiDocsPath + "/**",
+                            swaggerGeneralPath + "/**",
+                            "/error")
+                            .permitAll();
                     auth.anyRequest().authenticated();
                 })
                 .sessionManagement(sessionManagment -> sessionManagment.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

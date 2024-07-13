@@ -70,9 +70,10 @@ export class TaskService {
 
     updateTaskStatus(taskData: any): Observable<any> {
         const token = localStorage.getItem('token');
-        const headers = new HttpHeaders()
-            .set('Authorization', `${token}`)
-            .set('Content-Type', 'application/json');
+        const headers = new HttpHeaders({
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        });
 
         console.log(headers);
         return this.http.put<any>(this.baseUrl, taskData, { headers });
