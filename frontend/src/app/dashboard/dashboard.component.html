@@ -2,7 +2,6 @@
   <div class="header-field">
     <h1>Hello {{currentUser.name}}!</h1>
     <div class="right-side">
-      <button class="filter-btn" type="button"><img alt="filter_icon" src="assets/filter_icon.png"></button>
       <div class="search-container">
         <button class="search-btn" type="button" (click)="searchBtnClick()"><img alt="search_icon" src="assets/search_icon.png"></button>
         <input [(ngModel)]="searchName" type="text" placeholder="Search by name..."/>
@@ -24,7 +23,6 @@
             <div class="task-header">
               <p>{{ item.title }}</p>
             </div>
-            <div class="timeline-row-green"></div>
           </div>
         </div>
       </div>
@@ -34,7 +32,6 @@
             <div class="task-header">
               <p>{{ item.title }}</p>
             </div>
-            <div class="timeline-row-green"></div>
           </div>
         </div>
       </div>
@@ -44,7 +41,6 @@
             <div class="task-header">
               <p>{{ item.title }}</p>
             </div>
-            <div class="timeline-row-green"></div>
           </div>
         </div>
       </div>
@@ -54,7 +50,6 @@
             <div class="task-header">
               <p>{{ item.title }}</p>
             </div>
-            <div class="timeline-row-green"></div>
           </div>
         </div>
       </div>

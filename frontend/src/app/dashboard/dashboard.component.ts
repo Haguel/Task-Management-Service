@@ -76,14 +76,7 @@ export class DashboardComponent implements OnInit{
         this.taskService.updateFinishedList(finishedTasks);
         this.taskService.updateExpiredList(expiredTasks);
 
-        let tasksCountData = {
-          all: toDoTasks.length + doingTasks.length + finishedTasks.length + expiredTasks.length,
-          doing: doingTasks.length,
-          finished: finishedTasks.length,
-          expired: expiredTasks.length
-        };
-        console.log(tasksCountData)
-        localStorage.setItem('tasksCountData', JSON.stringify(tasksCountData));
+        this.getAndSendTasksInfoToAccount(toDoTasks, doingTasks, finishedTasks, expiredTasks);
       },
       error => {
         if (error.status == 401) {
@@ -91,6 +84,17 @@ export class DashboardComponent implements OnInit{
         }
       }
     );
+  }
+
+  getAndSendTasksInfoToAccount(toDoTasks: any[], doingTasks: any[], finishedTasks: any[], expiredTasks: any[]) {
+    let tasksCountData = {
+      all: toDoTasks.length + doingTasks.length + finishedTasks.length + expiredTasks.length,
+      doing: doingTasks.length,
+      finished: finishedTasks.length,
+      expired: expiredTasks.length
+    };
+    console.log(tasksCountData)
+    localStorage.setItem('tasksCountData', JSON.stringify(tasksCountData));
   }
 
   checkAndPushByFilter(title: string, task: string, status_list: any[]) {
@@ -118,6 +122,10 @@ export class DashboardComponent implements OnInit{
     };
     localStorage.setItem('currentTaskForRedact', JSON.stringify(task));
     this.bsModalRef = this.modalService.show(RedacttaskwindowComponent, config);
+    // @ts-ignore
+    this.bsModalRef.onHide.subscribe(() => {
+      this.getUserTasks(this.searchName);
+    });
   }
 
 
@@ -169,9 +177,19 @@ export class DashboardComponent implements OnInit{
       }
       task.status = newStatus;
 
-      this.taskService.updateTaskStatus(task).subscribe(
+      let currTask = {
+        "taskId": task.id,
+        "title": task.title,
+        "description": task.description,
+        "untilDate": this.taskService.convertToISO(task.untilDate),
+        "status": task.status
+      }
+
+      console.log(currTask)
+      this.taskService.updateTaskStatus(currTask).subscribe(
         response => {
           console.log('Task status updated successfully:', response);
+          this.getUserTasks(this.searchName);
         },
         error => {
           console.error('Error updating task status:', error);

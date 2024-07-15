@@ -10,7 +10,8 @@ export class TaskService {
 
     private baseUrl = 'http://localhost:8080/tasks';
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {
+    }
 
     private toDoListSource = new BehaviorSubject<any[]>([]);
     private doingListSource = new BehaviorSubject<any[]>([]);
@@ -45,7 +46,7 @@ export class TaskService {
             'Content-Type': 'application/json'
         });
 
-        return this.http.post<any>(this.baseUrl, taskData, { headers })
+        return this.http.post<any>(this.baseUrl, taskData, {headers})
             .pipe(
                 tap((newTask) => {
                     const currentTasks = this.toDoListSource.getValue();
@@ -62,7 +63,7 @@ export class TaskService {
             'Content-Type': 'application/json'
         });
         console.log(headers);
-        return this.http.get<any>(this.baseUrl, { headers })
+        return this.http.get<any>(this.baseUrl, {headers})
             .pipe(
                 catchError(this.handleError)
             );
@@ -70,22 +71,24 @@ export class TaskService {
 
     updateTaskStatus(taskData: any): Observable<any> {
         const token = localStorage.getItem('token');
-        const headers = new HttpHeaders({
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        });
+        const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Content-Type', 'application/json');
 
         console.log(headers);
-        return this.http.put<any>(this.baseUrl, taskData, { headers });
+        return this.http.put<any>(this.baseUrl, taskData, {headers});
     }
 
-    deleteTask(taskId: any) {
+    deleteTask(taskObj: any) {
         const token = localStorage.getItem('token');
-        const headers = new HttpHeaders({
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        });
-        return this.http.delete<any>(`${this.baseUrl}/${taskId}`, { headers });
+        const headers = new HttpHeaders()
+            .set('Authorization', `Bearer ${token}`)
+            .set('Content-Type', 'application/json');
+
+        const options = {
+            headers: headers,
+            body: taskObj
+        };
+
+        return this.http.request<any>('DELETE', this.baseUrl, options);
     }
 
     private handleError(error: HttpErrorResponse) {
@@ -96,5 +99,31 @@ export class TaskService {
             errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
         }
         return throwError(errorMessage);
+    }
+
+    convertToISO = (dateString: any): string => {
+        const date = new Date(dateString);
+        return date.toISOString();
+    };
+
+    getColorBasedOnDateDifference(date1: string, date2: string): string {
+        const firstDate = new Date(date1);
+        const secondDate = new Date(date2);
+
+        const diffInMilliseconds = Math.abs(secondDate.getTime() - firstDate.getTime());
+
+        const diffInDays = diffInMilliseconds / (1000 * 60 * 60 * 24);
+
+        if (diffInDays > 30) {
+            return 'green';
+        } else if (diffInDays > 24) {
+            return 'lightgreen';
+        } else if (diffInDays > 18) {
+            return 'yellow';
+        } else if (diffInDays > 12) {
+            return 'orange';
+        } else {
+            return 'red';
+        }
     }
 }

@@ -1,0 +1,17 @@
+<div class="mybody">
+    <div class="header">
+        <h1>About us</h1>
+        <p>We developed an interactive user interface that allows users to easily create, edit, and track tasks. Our task manager includes a convenient system for categorizing tasks by status, API integration for user authentication, and the implementation of various features such as instant task list updates.</p>
+    </div>
+    <div class="cards">
+        <div class="card" *ngFor="let userData of devData">
+            <img src="{{userData.avatar_url}}" alt="user_avatar"/>
+            <h2>{{userData.name}}</h2>
+            <p>({{userData.login}})</p>
+            <hr>
+            <p *ngIf="userData.login == 'quk1se'">Frontend dev.</p>
+            <p *ngIf="userData.login == 'Haguel'">Backend dev.</p>
+            <input type="button" value="Link" (click)="goToUserGithub(userData.html_url)">
+        </div>
+    </div>
+</div>

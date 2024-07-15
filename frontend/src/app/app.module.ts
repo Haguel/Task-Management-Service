@@ -14,6 +14,7 @@ import { CreatetaskwindowComponent } from './createtaskwindow/createtaskwindow.c
 import {HttpClientModule} from "@angular/common/http";
 import { AccountpageComponent } from './accountpage/accountpage.component';
 import { RedacttaskwindowComponent } from './redacttaskwindow/redacttaskwindow.component';
+import { AboutuspageComponent } from './aboutuspage/aboutuspage.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { RedacttaskwindowComponent } from './redacttaskwindow/redacttaskwindow.c
     CreatetaskwindowComponent,
     AccountpageComponent,
     RedacttaskwindowComponent,
+    AboutuspageComponent,
   ],
   imports: [
     BrowserModule,

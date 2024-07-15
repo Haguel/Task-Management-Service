@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import {HttpClient} from "@angular/common/http";
+import {GitService} from "./git.service";
 
 @Component({
   selector: 'app-root',
@@ -12,9 +14,19 @@ export class AppComponent implements OnInit {
   private currentUserSubject = new BehaviorSubject<any>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
 
-  constructor() {}
+  constructor(private gitService: GitService) {}
 
   ngOnInit(): void {
+    this.gitService.getUserData('quk1se')
+        .subscribe(data => {
+          localStorage.setItem('quk1seData', JSON.stringify(data));
+        });
+
+    this.gitService.getUserData('haguel')
+        .subscribe(data => {
+          localStorage.setItem('haguelData', JSON.stringify(data));
+        });
+
     const storedUser = localStorage.getItem('userData');
     if (storedUser) {
       this.currentUser = JSON.parse(storedUser);
@@ -35,4 +47,5 @@ export class AppComponent implements OnInit {
     this.currentUserSubject.next(this.currentUser);
     localStorage.setItem('userData', JSON.stringify(userData));
   }
+
 }

@@ -55,6 +55,7 @@
   height: 2.5vw;
   color: #D5DDDF;
   padding-left: 0.5vw;
+  padding-right: 0.5vw;
 }
 .input-group textarea {
   background: #364940;

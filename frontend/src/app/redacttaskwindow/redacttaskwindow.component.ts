@@ -26,11 +26,13 @@ export class RedacttaskwindowComponent implements OnInit {
     this.taskTitle = this.currTask.title;
     this.taskDescription = this.currTask.description;
     this.taskDeadline = this.currTask.untilDate;
+
   }
 
   delete() {
     console.log(this.currTask)
     let obj = {'taskId': this.currTask.id};
+    console.log(obj)
     this.taskService.deleteTask(obj).subscribe(
       response => {
         console.log(response);
@@ -43,16 +45,16 @@ export class RedacttaskwindowComponent implements OnInit {
 
   save() {
     const redactTask = {
-      id: this.currTask.id,
+      taskId: this.currTask.id,
       title: this.taskTitle,
       description: this.taskDescription,
-      untilDate: this.taskDeadline,
+      untilDate: this.taskService.convertToISO(this.taskDeadline),
       status: this.currTask.status,
     }
     console.log(redactTask);
     this.taskService.updateTaskStatus(redactTask).subscribe(
       response => {
-        console.log(response);
+        this.close();
       },
       error => {
         console.log(error);

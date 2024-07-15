@@ -19,13 +19,10 @@ export class CreatetaskwindowComponent implements OnInit {
   taskDeadline: string = '';
 
   serverStatus: string = '';
-  constructor(public bsModalRef: BsModalRef, private http: HttpClient,
-              private taskService: TaskService) {
+  constructor(public bsModalRef: BsModalRef, private taskService: TaskService) {}
 
-  }
-  ngOnInit() {
 
-  }
+  ngOnInit() { }
 
 
   close() {

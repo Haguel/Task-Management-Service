@@ -5,6 +5,7 @@ import {LoginformComponent} from "./loginform/loginform.component";
 import {RegistrationformComponent} from "./registrationform/registrationform.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {AccountpageComponent} from "./accountpage/accountpage.component";
+import {AboutuspageComponent} from "./aboutuspage/aboutuspage.component";
 
 const routes: Routes = [
   {path: '', component: MainpageComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'signup', component: RegistrationformComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'account', component: AccountpageComponent},
+  {path: 'about-us', component: AboutuspageComponent }
 ];
 
 @NgModule({
