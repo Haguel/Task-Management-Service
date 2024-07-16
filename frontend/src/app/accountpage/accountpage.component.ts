@@ -35,6 +35,7 @@ export class AccountpageComponent implements OnInit {
     if (tasksCountData) {
       this.tasks_counts = JSON.parse(tasksCountData);
     }
+
     this.all_tasks_count = this.tasks_counts.all;
     this.doing_tasks_count = this.tasks_counts.doing;
     this.finished_tasks_count = this.tasks_counts.finished;
@@ -44,6 +45,7 @@ export class AccountpageComponent implements OnInit {
   logout() {
     this.currentUser = null;
     localStorage.removeItem('userData');
+    localStorage.removeItem('token');
     this.currentUserSubject.next(this.currentUser);
     this.router.navigate(['']);
     this.appComponent.updateUserData(this.currentUser)

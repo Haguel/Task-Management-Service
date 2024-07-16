@@ -36,6 +36,7 @@ export class RedacttaskwindowComponent implements OnInit {
     this.taskService.deleteTask(obj).subscribe(
       response => {
         console.log(response);
+        this.close();
       },
       error => {
         console.log(error);
