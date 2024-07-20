@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  angular-app:
+    container_name: angular-app
+    image: angular
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    volumes:
+      - .:/app
+      - /node_modules
+  postgres:
+    container_name: postgres-sql
+    image: postgres
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: test
+    ports:
+      - "1234:5432"
+    volumes:
+      - postgres:/var/lib/postgres/data
+    networks:
+      - spring-task-management-service-network
+  spring-boot-app:
+    container_name: spring-task-management-service
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: spring/task-management-service
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-task-management-service-network
+    depends_on:
+      - postgres
+volumes:
+  postgres:
+networks:
+  spring-task-management-service-network:
+    driver: bridge
