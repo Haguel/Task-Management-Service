@@ -16,7 +16,10 @@
   padding: 2.5vw;
   color: white;
   font-family: 'BoldRounded', sans-serif;
-  overflow: auto;
+  overflow: hidden;
+}
+.placeholder {
+  color: gray;
 }
 .my-modal-header {
   display: flex;

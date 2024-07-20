@@ -15,7 +15,7 @@
     </div>
     <div class="input-group">
       <p>Due to</p>
-      <input type="datetime-local" [(ngModel)]="taskDeadline"/>
+      <input type="datetime-local" placeholder="MM/DD/YYYY --:--" [(ngModel)]="taskDeadline"/>
     </div>
     <div class="buttons-row">
       <input type="button" class="close-btn" value="Close" (click)="close()"/>
